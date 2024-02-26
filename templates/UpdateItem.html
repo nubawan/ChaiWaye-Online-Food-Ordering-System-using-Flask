@@ -1,0 +1,12 @@
+<form method="post" action="{{ url_for('update_item', item_name=item['iname']) }}">
+    <label for="updated_name">Updated Name:</label>
+    <input type="text" name="updated_name" value="{{ item['iname'] }}" required>
+
+    <label for="updated_price">Updated Price:</label>
+    <input type="text" name="updated_price" value="{{ item['iprice'] }}" required>
+
+    <label for="updated_category">Updated Category:</label>
+    <input type="text" name="updated_category" value="{{ item['icategory'] }}" required>
+
+    <input type="submit" value="Update Item">
+</form>

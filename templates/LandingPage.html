@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chai Waye</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;700&family=Shadows+Into+Light&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="static\img\logo.jpeg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alice&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alice&family=Architects+Daughter&display=swap"
+        rel="stylesheet">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+</head>
+
+<body>
+
+    <nav class="navbar" style="background-color: #e3f2fd;">
+        <div class="container">
+            <a class="navbar-brand  mx-auto" href="/">
+                <img class="logo" src="{{ url_for('static', filename='img/logo.jpeg') }}" width="30" height="24"> Chai
+                Waye</a>
+        </div>
+    </nav>
+
+    <div class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{{ url_for('static', filename='img/chaibg.jpg') }}" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-flex align-items-center justify-content-center h-100">
+                    <div>
+                        <h1 class="m1">Welcome to Chai Waye</h1>
+                        <p class="p1">Tea-lover's Paradise: Chai Waye's Signature Blends Await.</p>
+                        <button type="button" class="btn btn-primary d-table my-5 mx-auto fw-bold"
+                            data-bs-toggle="modal" data-bs-target="#Login">
+                            Login</button>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{{ url_for('static', filename='img/desi omelet bg.jpg') }}" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-flex align-items-center justify-content-center h-100">
+                    <div>
+                        <h1 class="m1">Where Flavor Meets Elegance</h1>
+                        <p class="p1"> Chai Waye's Tea Masterpieces.</p>
+                        <button type="button" class="btn btn-primary d-table my-5 mx-auto fw-bold"
+                            data-bs-toggle="modal" data-bs-target="#Signup">
+                            Order Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--LOGIN-->
+    <div class="modal fade" id="Login" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+                <form action="/login" method="POST">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Welcome to Chai Waye</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <h6 class="h6">Login Now!</h6>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="Username">Username<span class="text-danger">*</span></label>
+                            <input type="text" name="username" class="form-control" id="Username"
+                                placeholder="Enter Username" name="username" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Password">Password<span class="text-danger">*</span></label>
+                            <input type="password" name="password" class="form-control" id="Password"
+                                placeholder="Enter Password" name="password" required>
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-check-input" type="checkbox" value="" id="remember">
+                            <label class="form-check-label" for="remember">Remember Me</label>
+                            <a href="#" class="float-end">Forgot Password</a>
+                        </div>
+                    </div>
+                    <div class="modal-footer pt-4">
+                        <button type="submit" class="btn btn-primary mx-auto w-100">Login</button>
+                    </div>
+                    <p class="text-center">Register an account! <a href="#" data-bs-toggle="modal"
+                            data-bs-target="#Signup">Signup</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- SIGN UP-->
+    <div class="modal fade" id="Signup" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form action="/signup" method="POST">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Welcome to Chai Waye</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <h6 class="h6">Create an account now!</h6>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="Username">Username<span class="text-danger">*</span></label>
+                            <input type="text" name="username" class="form-control" id="Username"
+                                placeholder="Enter Username" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="FirstName">First Name<span class="text-danger">*</span></label>
+                            <input type="text" name="FirstName" class="form-control" id="FirstName"
+                                placeholder="First Name" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="LastName">Last Name<span class="text-danger">*</span></label>
+                            <input type="text" name="LastName" class="form-control" id="LastName"
+                                placeholder="Last Name" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Email">Email<span class="text-danger">*</span></label>
+                            <input type="email" name="Email" class="form-control" id="Email"
+                                placeholder="Enter Your Email" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Password">Password<span class="text-danger">*</span></label>
+                            <input type="password" name="password" class="form-control" id="Password"
+                                placeholder="Enter Password" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="PhoneNo">Phone No<span class="text-danger">*</span></label>
+                            <input type="text" name="cmobile" class="form-control" id="PhoneNo"
+                                placeholder="Enter Phone Number" required min="11" max="11">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="address">Address</Address><span class="text-danger">*</span></label>
+                            <input type="text" name="address" class="form-control" id="address"
+                                placeholder="Enter Address" required>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer pt-4">
+                        <button type="submit" class="btn btn-primary mx-auto w-100">Register Account</button>
+                    </div>
+                    <p class="text-center">Already a User? <a href="#" data-bs-toggle="modal"
+                            data-bs-target="#Login">Login</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="div1">
+        <div id="title-container">
+            <h1>▂▃▅▇█▓▒░ Our Devourable Menu ░▒▓█▇▅▃▂</h1>
+        </div>
+        <div class="inner-div">
+            <div class="container">
+                {% for category, category_items in grouped_items.items() %}
+                <h2 class="catg">
+                    ╰┈► {{ category }} ◄┈╯
+                </h2>
+                <div class="row row-cols-1 row-cols-md-6 g-2">
+                    {% for item in category_items %}
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="{{ url_for('static', filename='img/' + item['img']) }}" class="card-img-top"
+                                alt="{{ item['iname'] }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ item['iname'] }}</h5>
+                                <h5 class="card-title">Rs {{ item['iprice'] }}</h5>
+                                <p class="card-text">Category: {{ item['icategory'] }}</p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted"><button type="submit"
+                                        class="btn btn-success mx-auto w-100" data-bs-toggle="modal" data-bs-target="#Login">Add to cart</button></small>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+
+
+        </div>
+    </div>
+    <!---REVIEWS-->
+    <div id="div1">
+        <div id="title-container">
+            <h1>---REVIEWS--</h1>
+        </div>
+        <div class="inner-div">
+            <div class="row">
+                {% for review in reviews %}
+                <div class="col-sm-6">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class='fas fa-user-alt' style='font-size:24px'></i>
+                                User
+                            </h5>
+
+                            <p class="card-text">{{ review.comment }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+</body>
+
+
+
+<footer class="text-center text-white" style="background-color: #000000;">
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2023 Copyright:
+        <a class="text-white" href="https://github.com/nubawan">Github/nubawan</a>
+    </div>
+</footer>
+</section>
+
+
+
+</html>

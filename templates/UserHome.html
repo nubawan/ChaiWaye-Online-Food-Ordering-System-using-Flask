@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chai Waye</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/static/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;700&family=Shadows+Into+Light&display=swap"
+    rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="static\img\logo.jpeg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alice&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alice&family=Architects+Daughter&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+  <nav class="navbar" style="background-color: #e3f2fd;">
+    <div class="container">
+      <a class="navbar-brand  mx-auto" href="/home">
+        <img class="logo" src="{{ url_for('static', filename='img/logo.jpeg') }}" width="30" height="24"> Chai Waye</a>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+     <a href="/profile"> <button class="btn btn-outline-primary" type="button">Profile</button>
+      </div></a>  
+    </div>
+  </nav>
+  <div class="greeting">
+    {% if session['username'] %}
+    Hey {{ session['username'] }}! Welcome to Chai Waye.
+    <div class="greeting"> Sip, Savor, Smile</div>
+    {% endif %}
+  </div>
+  <div id="div1">
+    <i class="fa fa-shopping-cart" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="font-size:48px"></i>
+
+    <div id="title-container">
+      <h1>▂▃▅▇█▓▒░ Our Devourable Menu ░▒▓█▇▅▃▂</h1>
+    </div>
+    <div class="inner-div">
+ <!-- Your modal code -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Your Cart</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="cart-message" class="alert alert-success" role="alert" style="display: none;"></div>
+        <ul id="cart-items"></ul>
+        <p>Total Bill: Rs <span id="total-bill">0</span></p>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+        <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button" type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="confirmOrder()">Proceed to Payment</a>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div id="cart-message" class="alert alert-success" role="alert" style="display: none;"></div>
+
+<!---Payment-->
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Choose Payment Method</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end"> 
+          <a href="/Payment"> <button type="button" class="btn btn-primary btn-sm">Pay Online</button></a>
+          <a href="/ProcessingOrder"><button type="button" class="btn btn-secondary btn-sm">Cash on Delivery (COD)</button></a></div>
+          </div>
+    </div>
+  </div>
+</div>
+
+<!-- Your container and item cards -->
+<div class="container">
+  {% for category, category_items in grouped_items.items() %}
+    <h2 class="catg">
+      ╰┈► {{ category }} ◄┈╯
+    </h2>
+<!-- </div> -->
+  <div class="row row-cols-1 row-cols-md-6 g-2">
+    {% for item in category_items %}
+    <div class="col">
+      <div class="card h-100">
+        <img src="{{ url_for('static', filename='img/' + item['img']) }}" class="card-img-top" alt="{{ item['iname'] }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ item['iname'] }}</h5>
+          <h5 class="card-title">Rs {{ item['iprice'] }}</h5>
+          <p class="card-text">Category: {{ item['icategory'] }}</p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">
+            <!-- Add a data attribute to store item information -->
+            <button type="button" class="btn btn-success mx-auto w-100" onclick="addToCart('{{ item['iname'] }}', '{{ item['iprice'] }}')">Add to cart</button>
+          </small>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+</div>
+<div id="notification" class="alert alert-success" style="display: none;">
+  Item added to cart!
+</div>
+
+
+<script>
+    function redirectTo(url) {
+        window.location.href = url;
+    }
+</script>
+<script>
+  // JavaScript functions
+  const cartItems = [];
+
+  function addToCart(itemName, itemPrice) {
+    const existingItem = cartItems.find(item => item.name === itemName);
+
+    if (existingItem) {
+      // If the item already exists in the cart, increase the quantity
+      existingItem.quantity += 1;
+    } else {
+      // Otherwise, add a new item to the cart
+      const newItem = { name: itemName, price: parseFloat(itemPrice), quantity: 1 };
+      cartItems.push(newItem);
+
+      // Display a message when an item is added to the cart
+      displayCartMessage(`${itemName} added to cart`);
+    }
+
+    // Update the cart display
+    updateCartDisplay();
+  }
+
+  function updateCartDisplay() {
+    const cartList = document.getElementById('cart-items');
+    const totalBillElement = document.getElementById('total-bill');
+    let totalBill = 0;
+
+    cartList.innerHTML = '';
+
+    cartItems.forEach(item => {
+      const listItem = document.createElement('li');
+      listItem.textContent = `${item.name} - Rs ${item.price.toFixed(2)} x ${item.quantity}`;
+
+      // Add a button to remove the item from the cart
+      const removeButton = document.createElement('button');
+      removeButton.textContent = 'Remove';
+      removeButton.type = 'button';
+      removeButton.className = 'btn btn-danger btn-sm mx-2';
+      removeButton.onclick = () => removeCartItem(item.name);
+
+      listItem.appendChild(removeButton);
+      cartList.appendChild(listItem);
+
+      // Calculate the total bill for each item
+      totalBill += item.price * item.quantity;
+    });
+
+    // Update the total bill in the modal
+    totalBillElement.textContent = totalBill.toFixed(2);
+  }
+
+  function removeCartItem(itemName) {
+    const itemIndex = cartItems.findIndex(item => item.name === itemName);
+
+    if (itemIndex !== -1) {
+      cartItems.splice(itemIndex, 1);
+
+      // Display a message when an item is removed from the cart
+      displayCartMessage(`${itemName} removed from cart`);
+
+      // Update the cart display
+      updateCartDisplay();
+    }
+  }
+
+  function displayCartMessage(message) {
+    const messageElement = document.getElementById('cart-message');
+    if (messageElement) {
+      messageElement.textContent = message;
+      messageElement.style.display = 'block';
+
+      // Hide the message after 3 seconds
+      setTimeout(() => {
+        messageElement.style.display = 'none';
+      }, 3000);
+    }
+  }
+
+  function confirmOrder() {
+    // Implement logic to handle the order confirmation, e.g., send data to the server
+    console.log('Order confirmed:', cartItems);
+
+    // You can also update the database here using an AJAX request
+    // Example: fetch('/updateDatabase', { method: 'POST', body: JSON.stringify(cartItems) });
+  }
+</script>
+      <!-- <div class="container">
+        {% for category, category_items in grouped_items.items() %}
+        <h2>{{ category }}</h2>
+        <div class="row row-cols-1 row-cols-md-6 g-2">
+            {% for item in category_items %}
+            <div class="col">
+                <div class="card h-100">
+                    <img src="{{ url_for('static', filename='img/' + item['img']) }}" class="card-img-top" alt="{{ item['iname'] }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item['iname'] }}</h5>
+                        <h5 class="card-title">Rs {{ item['iprice'] }}</h5>
+                        <p class="card-text">Category: {{ item['icategory'] }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted"><button type="submit" class="btn btn-success mx-auto w-100">Add to cart</button></small>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+      </div>
+    </div>
+  </div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Your Cart</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Confirm Order</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+    </div></div></body>
+  <footer class="text-center text-white" style="background-color: #000000;">
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2023 Copyright:
+      <a class="text-white" href="https://github.com/nubawan">Github/nubawan</a>
+    </div>
+  </footer>
+
+
+</html>

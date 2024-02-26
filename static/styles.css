@@ -1,0 +1,135 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.logo {
+    transform: translateY(-1px);
+}
+
+/* styles.css */
+
+.m1 , .p1 {
+    margin: 30px;
+    border: 1px solid black;
+    outline: 1px solid red;
+    outline-offset: 15px;
+    background: black;
+    /* font-family: 'Kalam', cursive;
+    font-family: 'Shadows Into Light', cursive; */
+    font-family: 'Alice', serif;
+    font-family: 'Architects Daughter', cursive;
+    /* font-family: 'Alice', serif; */
+}
+
+.navbar-brand {
+
+    font-family: 'Shadows Into Light', cursive;
+}
+
+.h6{
+    margin-top: 10px;
+    margin-bottom: -10px;
+    text-align: center;
+}
+
+
+
+
+
+
+#div1 {
+    background-color: yellow;
+    padding: 20px;
+  }
+
+  #div1 > .inner-div {
+    background-color: white;
+    padding: 50px;
+    border-radius: 20px;
+    margin: 0px 80px;
+
+
+  }
+
+  #title-container {
+    background-color: yellow;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Alice', serif;
+
+  }
+
+  .greeting{
+    text-align: center;
+    font-weight: bold;
+    font-size: x-large;
+    font-family: 'Alice', serif;
+
+  }
+
+  .center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    border-color: black;
+    border-radius: 20px;
+
+}
+
+.yellow-container {
+  margin:10% 40% ;
+  border-radius: 20px;
+  padding: 20px; /* Add padding for space around buttons */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50vh;
+  height: 50vh; /* Adjust the height as needed */
+  border: 2px solid red; /* Add red border */
+}
+
+.info{
+  margin: 20px 30% ;
+  border-radius: 20px;
+  padding: 20px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80vh;
+  height: 90vh; 
+  border: 2px solid red; 
+}
+
+.new {
+position: fixed;
+left: 0;
+bottom: 0;
+width: 100%;
+background-color: red;
+color: white;
+text-align: center;} 
+
+#div1 {
+  position: relative;
+}
+
+.fa-shopping-cart {
+  position: fixed;
+  bottom: 10px; /* Adjust the bottom value as needed */
+  right: 10px; /* Adjust the right value as needed */
+  font-size: 48px;
+  color: red;
+  z-index: 1000; /* Ensure it's above other elements */
+}
+
+
+.catg{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
